@@ -1,0 +1,217 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+img,input,button { border:none; padding:0;margin:0;outline-style:none; }
+ul, ol { list-style:none; }
+a{text-decoration: none; }
+.w {  /*版心 提取 */
+  width: 1000px;margin:0 auto;
+}
+
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+body{
+  background-color: #f4f4f4;
+}
+
+.clearfix:before,.clearfix:after {
+  content:"";
+  display:table;
+}
+.clearfix:after{clear:both;}
+.clearfix{
+  *zoom:1;/*IE/7/6*/
+}
+
+/* element */
+/* banner */
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 18px;
+  opacity: 0.75;
+  line-height: 300px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+  background-color: #d3dce6;
+}
+/* 底部点点 */
+.el-carousel__indicators .el-carousel__button{
+  height:10px;
+  width:10px;
+  border-radius: 10px;
+
+}
+.el-carousel .el-carousel__indicators--horizontal{
+  left:87%;
+  bottom: 14px;
+}
+.el-carousel__container button{
+  height: 50px;
+  width: 50px;
+}
+.el-carousel__container button i{
+  font-size: 18px;
+}
+/* 时间线 */
+.el-timeline-item__wrapper .el-timeline-item__content{
+  color: #555555;
+}
+.el-timeline-item{
+  cursor: pointer;
+  display: block;
+}
+.el-timeline-item:hover .el-timeline-item__node{
+  background-color: #f58b74;
+}
+.el-timeline-item:hover .el-timeline-item__wrapper .el-timeline-item__content{
+  color: #333333;
+}
+.el-timeline-item .el-timeline-item__wrapper{
+  padding-left: 20px;
+}
+/* 推荐热议 */
+.el-tabs .el-tabs__item.is-active{
+  color: #f58b54;
+}
+.el-tabs .el-tabs__active-bar{
+  background-color: #f58b54;
+  width: 35px;
+}
+.el-tabs .el-tabs__item{
+  height: 36px;
+  line-height: 30px;
+  padding: 0 12px;
+  font-size: 18px;
+}
+.el-tabs .el-tabs__item:hover{
+  color: #f58b54;
+}
+.el-tabs .el-tabs__header{
+  margin: 0 0 20px;
+}
+.el-tabs__nav-wrap::after{
+  background-color: none;
+}
+
+/* 列表图片组 */
+.demo-image__preview{
+  display: flex;
+  justify-content: space-between;
+}
+.el-image {
+  border-radius: 4px;
+
+}
+/* 关注头像 */
+.el-avatar--circle{
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* 登录页 */
+.cardTop .el-tabs__nav-wrap::after{
+  background-color: #fff;
+}
+.logininput .el-input{
+  margin-bottom: 0px;
+}
+.logininput .el-input input{
+  background-color: #f7f7f7;
+  border: 1px solid #f7f7f7;
+  height: 46px;
+
+}
+.logininput .el-input input:focus{
+  background: #fff;
+  border:1px solid #f58b54;
+}
+/* 主题选择 */
+.themediv .el-radio-button__orig-radio:checked+.el-radio-button__inner{
+  color: #f58b54;
+  background-color: #fff;
+  font-weight: bold;
+  box-shadow: none;
+  -webkit-box-shadow:none;
+}
+.themediv .el-radio-button__inner:hover{
+  color: #f58b54;
+}
+.themediv .el-radio-button:first-child .el-radio-button__inner{
+  border: none;
+}
+.themediv .el-radio-button__inner{
+  border: none;
+  padding: 18px 18px 20px 18px;
+}
+.themediv .el-collapse-item__content{
+  padding-bottom: 0px;
+}
+.themediv .el-collapse-item__content .el-radio-button__inner{
+  padding-top: 8px;
+}
+.themediv .el-collapse-item__wrap{
+  border: none;
+}
+.themediv .el-collapse-item__header{
+  border: none;
+}
+/* 品种页 */
+.varieties .el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 200px;
+  margin: 0;
+}
+
+.varieties .el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.varieties .el-carousel__item:nth-child(2n+1) {
+  background-color: #d3dce6;
+}
+.varieties .el-carousel__item{
+  border-radius: 4px;
+}
+/* 品种卡片 */
+.time {
+  font-size: 13px;
+  color: #999;
+}
+
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+}
+
+.button {
+  padding: 0;
+  float: right;
+}
+
+.image {
+  width: 100%;
+  display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
+}
