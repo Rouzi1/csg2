@@ -215,3 +215,8 @@ body{
 .clearfix:after {
     clear: both
 }
+
+/* 4adopt寻找铲屎官页面 */
+.adopt .themediv .el-radio-button__inner{
+  padding: 18px 4px 20px 18px;
+}

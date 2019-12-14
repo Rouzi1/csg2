@@ -20,7 +20,6 @@
                 </el-radio-group>
               </el-collapse-item>
             </el-collapse>
-
           </div>
           <div class="bottomline "></div>
         </div>

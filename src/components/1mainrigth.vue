@@ -185,6 +185,10 @@ export default {
     // 滚动事件
     window.addEventListener('mousewheel',this.handleScroll,false)
   },
+  destroyed () {
+    console.log("执行des");
+     window.removeEventListener('mousewheel',this.handleScroll,false)
+  }
 }
 </script>
 

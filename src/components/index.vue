@@ -98,6 +98,7 @@
 import Main from '@/components/1main.vue'
 import Maintenance from '../components/2maintenance.vue'
 import varieties from '../components/3varieties'
+import adopt from '../components/4adopt'
 export default {
   data () {
     return {
@@ -123,7 +124,8 @@ export default {
   components: {
     Main,
     Maintenance,
-    varieties
+    varieties,
+    adopt
   },
   created () {
     if(this.$store.getters.getUser != null){
@@ -162,6 +164,7 @@ export default {
           case 3:
             doc.style.left = '321px';
             doc.style.width = '113px';  
+            this.middDivName = 'adopt';
             break;
           case 4:
             doc.style.left = '452px';
@@ -171,19 +174,19 @@ export default {
       }
     },
     messCardFunY(){
-      console.log("显示messCard");
+      // console.log("显示messCard");
       this.$refs.messCard.style.display = 'unset';
     },
     messCardFunN(){
-      console.log("显示messCard");
+      // console.log("显示messCard");
       this.$refs.messCard.style.display = 'none';
     },
     userCardFunY(){
-      console.log("显示userCard");
+      // console.log("显示userCard");
       this.$refs.userCard.style.display = 'unset';
     },
     userCardFunN(){
-      console.log("显示userCard");
+      // console.log("显示userCard");
       this.$refs.userCard.style.display = 'none';
     },
     // 退出登录
