@@ -5,13 +5,13 @@
       <div class="messdiv">
         <img src="../../../static/icon/头像2.png" @mouseenter="changeImgfun" @mouseout="changeImgfun2"/>
         <span class="changeImg" ref="changeImgdoc" @mouseenter="changeImgfun">修改头像</span>
-        <p class="name">我家猫主子</p>
+        <p class="name">我家猫主子{{tonotice}}</p>
         <p class="level">等级：我家猫主子</p>
         <div class="setbtn" @click="tosetPage">个人首页</div>
       </div>
       <div class="nav">
         <el-menu
-          default-active="1"
+          :default-active="defaultactive"
           class="el-menu-vertical-demo"
           @select="handleSelect"
           @open="handleOpen"
@@ -51,8 +51,10 @@ export default {
   data () {
     return {
       rightPage:'setPage1',
+      defaultactive:'1',
     }
   },
+  props: ["tonotice"],
   methods: {
     // 导航栏点击
     handleOpen(key, keyPath) {
@@ -92,6 +94,13 @@ export default {
     },
    
 
+  },
+  mounted () {
+    console.log(this.tonotice)
+    if(this.tonotice == true){
+      this.rightPage='setPage3';
+      this.defaultactive='3';
+    }
   }
 }
 </script>
@@ -171,8 +180,9 @@ export default {
     float: right;
     width: 768px;
     margin-top: 12px;
+    // padding-bottom: 100px;
     border-radius: 4px;
-    height: 1000px;
+    // height: 1000px;
     background-color: #fff;
     padding: 0 18px;
     box-sizing: border-box;

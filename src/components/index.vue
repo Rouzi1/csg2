@@ -5,7 +5,7 @@
         <!-- <img class="logo1" src="../../static/icon/图层4.png" alt=""> -->
         <img class="logo" src="../../static/icon/铲屎官.png" alt="">
         <div class="nav-list">
-          <ul>
+          <ul >
             <li><a href="" @click.prevent="navfun(0)" :class="navclass[0]">首页</a></li>
             <li><a href="" @click.prevent="navfun(1)" :class="navclass[1]">养猫101问</a></li>
             <li><a href="" @click.prevent="navfun(2)" :class="navclass[2]">猫咪品种</a></li>
@@ -29,7 +29,7 @@
             </div>
           </div>
           <!-- 头像 -->
-          <div class="headdiv " :class="{displayNone:!isLogin}" @mouseenter="userCardFunY()" @mouseleave="userCardFunN()" >
+          <div class="headdiv "  @click="gotoPersonalHomePage()" :class="{displayNone:!isLogin}" @mouseenter="userCardFunY()" @mouseleave="userCardFunN()" >
             <div class="head" >
               <img src="../../static/icon/头像.jpg" alt="">
             </div>
@@ -46,15 +46,15 @@
             <span class="title-action" v-if="item.type == 2">回复了你</span>
             <span class="title-time">{{item.time}}</span>
           </p>
-          <div>更多消息</div>
+          <div @click="tosetPage3">更多消息</div>
         </div>
         <!-- </transition> -->
         <!-- 用户信息卡片 -->
         <div class="userCard" ref="userCard" @mouseenter="userCardFunY()" @mouseleave="userCardFunN()">
-          <div class="pic"><img src="../../static/icon/头像.jpg" alt=""></div>
+          <div class="pic"><img src="../../static/icon/头像.jpg" alt="" @click="gotoPersonalHomePage()"></div>
           <div class="basemess">
-            <p class="username">{{userMess.name}}</p>
-            <p class="userleove">初级铲屎官</p>
+            <p class="username" @click="gotoPersonalHomePage()">{{userMess.name}}</p>
+            <p class="userleove" @click="gotoPersonalHomePage()">初级铲屎官</p>
           </div>
           <div class="userNum">
             <div class="li">
@@ -83,14 +83,14 @@
             </div>
           </div>
           <div class="btnli">
-            <div class="setbtn">设置</div>
+            <div class="setbtn" @click="tosetPage">设置</div>
             <div class="outbtn" @click="loginout">退出</div>
           </div>
         </div>
       </div>
       
     </div>
-    <component :is="middDivName"></component>
+    <component :is="middDivName" @func="tosetPage" :tonotice="istosetPage3"></component>
   </div>
 </template>
 
@@ -99,6 +99,9 @@ import Main from '@/components/1main.vue'
 import Maintenance from '../components/2maintenance.vue'
 import varieties from '../components/3varieties'
 import adopt from '../components/4adopt'
+import straycat from '../components/5straycat'
+import personalHomePage from '../components/user/PersonalHomePage'
+import setPage from '../components/user/setPage'
 export default {
   data () {
     return {
@@ -118,14 +121,18 @@ export default {
       // 个人信息
       ,userMess:[
         {}
-      ]
+      ],
+      istosetPage3:false
     }
   },
   components: {
     Main,
     Maintenance,
     varieties,
-    adopt
+    adopt,
+    straycat,
+    personalHomePage,
+    setPage
   },
   created () {
     if(this.$store.getters.getUser != null){
@@ -137,6 +144,14 @@ export default {
     }
   },
   methods: {
+    // 转到到个人首页
+    gotoPersonalHomePage(){
+      var doc = this.$refs.choosebuttom;
+      doc.style.display = 'none';
+      this.navclass = ['','','','',''];
+      this.middDivName = 'personalHomePage';
+      this.$refs.userCard.style.display = 'none';
+    },
     // 导航条移动
     navfun(x){
       console.log(x);
@@ -144,6 +159,7 @@ export default {
       this.navclass[x] = 'chosse';
       console.log(this.navclass[x]);
       var doc = this.$refs.choosebuttom;
+      doc.style.display = 'unset';
       switch(x)
       {
           case 0:
@@ -169,6 +185,7 @@ export default {
           case 4:
             doc.style.left = '452px';
             doc.style.width = '113px';  
+            this.middDivName = 'straycat';
             break;
           default:
       }
@@ -209,6 +226,30 @@ export default {
       }else{
         this.$router.push('/login');  
       }
+    },
+    // 接收子组件参数，
+    tosetPage(data){
+      // 转到消息设置页
+      // console.log(data);
+      var doc = this.$refs.choosebuttom;
+      doc.style.display = 'none';
+      this.navclass = ['','','','',''];
+      this.middDivName = 'setPage';
+      this.$refs.userCard.style.display = 'none';
+      //转到个人页面
+      if(data == 'fromSetPage'){
+        this.gotoPersonalHomePage();
+      }
+    },
+    // 转到消息设置页,进入消息tab
+    tosetPage3(){
+      this.prompt =0;
+       var doc = this.$refs.choosebuttom;
+      doc.style.display = 'none';
+      this.istosetPage3 = true;
+      this.navclass = ['','','','',''];
+      this.middDivName = 'setPage';
+      this.$refs.messCard.style.display = 'none';
     }
   }
 }

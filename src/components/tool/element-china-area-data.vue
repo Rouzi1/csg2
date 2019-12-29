@@ -21,10 +21,10 @@
 
     methods: {
       handleChange (value) {
-        console.log(value);
+        // console.log(value);
         // CodeToText['110000']
         var ctt = CodeToText[value[0]] + CodeToText[value[1]]
-        console.log(ctt)
+        // console.log(ctt)
         
         // 向父组件传参
         // 。。。。。。。。。。。。。。。。。。。。。。。。。。。
@@ -33,8 +33,8 @@
         }else if(value[1] == ""){
           ctt = CodeToText[value[0]]
         }
-        this.selectedOptions = ctt;
-        console.log(this.selectedOptions)
+        // this.selectedOptions = ctt;
+        // console.log(this.selectedOptions)
         this.$emit("area",ctt);
       }
     }

@@ -168,7 +168,10 @@ export default {
           // alert('submit!');
           // 登录成功
           console.log('登录成功');
-          var user ={name:this.loginForm.loginName};
+          var user ={
+            name:this.loginForm.loginName,
+            gender:'男'
+          };
           this.$store.commit('setUser', user);
           console.log(this.$store.state.user);
           this.$router.push('/');

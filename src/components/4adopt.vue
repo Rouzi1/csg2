@@ -1,7 +1,6 @@
 <template>
   <div class="adopt w">
     <div class="left"> 
-    
     <!-- 选择主题 -->
       <!-- <div class="search" >
         <input type="text" :placeholder="hotsearch" v-model="searchData" @keyup.enter="searchFun()">
@@ -32,6 +31,7 @@
         <div class="bottomline "></div>
       </div>
     <!-- 列表 -->
+      <div class="isListNull" v-if="adoptListIsNull">查无结果，换个条件试试吧！</div>
       <div class="list" v-for="(adopt,index) in adoptList" :key="index" >
          <el-image
           style="width: 144px; height: 144px"
@@ -47,10 +47,21 @@
               <img src="../../static/icon/领养评论.png" style="margin-top: 3px;" alt=""><span>{{adopt.pinglun}}</span>
               <img src="../../static/icon/用户.png" alt=""><span>{{adopt.athor}}</span>
               <img src="../../static/icon/时间.png" alt=""><span>{{adopt.time}}</span>
+              <!-- 举报 -->
+              <!-- <i class="el-icon-more" ></i> -->
+              <el-dropdown>
+                <span class="el-dropdown-link">
+                  <i class="el-icon-more" ></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>举报</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
           </div>
           <div class="buttom"></div>
       </div>
+       <p class="tobuttom"  v-if="!adoptListIsNull  ">没有更多了~</p>
     </div>
     <div class="right">
       <div class="fix" id="right">
@@ -82,263 +93,247 @@
 </template>
 
 <script>
-import areadata from '@/components/tool/element-china-area-data'
+  import areadata from '@/components/tool/element-china-area-data'
 
-export default {
-  components: {
-    areadata,
-  },
-  data () {
-    return {
-        // 搜索框
-      hotsearch:'猫窝打造'
-      , searchData:''
-      , oldName:"推荐"
-      , activeName: 'first'
-      // 选择主题
-      , choosesortway: '最新发布'
-      , sortway:['最新发布','最多评论']
-      , choosetype: '全部'
-      , type: ['全部','未被领养','已被领养']
-      , area:'全部'
-      // 领养文章列表
-      , adoptList:[]
-      , adoptListAll:[
-        {
-          type:0,
-          img:'../../static/icon/var4.jpg',
-          title:'橘猫送养，希望能有爱猫的人收养它',
-          catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心，',
-          requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，要有爱心，养过猫家里人不讨厌猫，没有猫毛过敏',
-          area:'广东省东莞市',
-          pinglun:23,
-          athor:'我家主子',
-          time:'2019.03.06'
-        },
-        {
-          type:1,
-          img:'../../static/icon/var4.jpg',
-          title:'橘猫送养，希望能有爱猫的人收养它',
-          catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心，喜欢猫，养没有猫毛过敏，要有爱心，',
-          requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏要有爱心，喜家里人不讨厌猫，没有猫毛过敏',
-          area:'广东省东莞市',
-          pinglun:1,
-          athor:'我家主子',
-          time:'2019.03.25'
-        },
-        {
-          type:1,
-          img:'../../static/icon/var4.jpg',
-          title:'橘猫送养，希望能有爱猫的人收养它',
-          catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心，喜欢猫，养没有猫毛过敏，要有爱心，',
-          requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏要有爱心，喜家里人不讨厌猫，没有猫毛过敏',
-          area:'广东省汕头市',
-          pinglun:0,
-          athor:'我家主子',
-          time:'2019.02.22'
-        },
-        {
-          type:1,
-          img:'../../static/icon/var4.jpg',
-          title:'橘猫送养，希望能有爱猫的人收养它',
-          catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心，喜欢猫，养没有猫毛过敏，要有爱心，',
-          requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏要有爱心，喜家里人不讨厌猫，没有猫毛过敏',
-          area:'广东省汕头市',
-          pinglun:7,
-          athor:'我家主子',
-          time:'2019.12.26'
-        },
-        {
-          type:1,
-          img:'../../static/icon/var4.jpg',
-          title:'橘猫送养，希望能有爱猫的人收养它',
-          catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心，喜欢猫，养没有猫毛过敏，要有爱心，',
-          requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏要有爱心，喜家里人不讨厌猫，没有猫毛过敏',
-          area:'广东省汕头市',
-          pinglun:44,
-          athor:'我家主子',
-          time:'2019.03.13'
-        },
-        {
-          type:0,
-          img:'../../static/icon/var4.jpg',
-          title:'橘猫送养，希望能有爱猫的人收养它',
-          catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心过敏，要有爱心，要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏，要有爱心，',
-          requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫要有爱心，喜欢猫，讨厌猫，没有猫毛过敏要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏',
-          area:'北京市',
-          pinglun:758,
-          athor:'我家主子',
-          time:'2013.03.11'
-        },
-        {
-          type:0,
-          img:'../../static/icon/var4.jpg',
-          title:'橘猫送养，希望能有爱猫的人收养它',
-          catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心讨厌猫，没有猫毛过敏，要有爱心，',
-          requirements:'要有爱心，喜欢猫，养过猫家里人不没有猫毛过敏',
-          area:'广东省广州市',
-          pinglun:888,
-          athor:'我家主子',
-          time:'2009.04.26'
-        },
-      ]
-    }
-  },
-  watch: {
-    // 选择类型
-    "choosetype":function(newVal,oldVal){
-      // // 筛选类型
-      // this.adoptList = this.choosetypeFun(newVal,this.adoptListAll)
-      // // 再排序
-      // this.sortfun(this.choosesortway,this.adoptList);
-      this.adoptList = this.screenFun('choosetype',newVal,this.adoptList)
+  export default {
+    components: {
+      areadata,
     },
-    // 选择排序方式
-    "choosesortway":function(newVal,oldVal){
-      // this.sortfun(newVal,this.adoptList);
-      this.adoptList = this.screenFun('choosesortway',newVal,this.adoptList)
+    data () {
+      return {
+          // 搜索框
+        hotsearch:'猫窝打造'
+        , searchData:''
+        , oldName:"推荐"
+        , activeName: 'first'
+        // 选择主题
+        , choosesortway: '最新发布'
+        , sortway:['最新发布','最多评论']
+        , choosetype: '全部'
+        , type: ['全部','未被领养','已被领养']
+        , area:'全部'
+        // 领养文章列表
+        , adoptList:[]
+        , adoptListAll:[
+          {
+            type:0,
+            img:'../../static/icon/var4.jpg',
+            title:'橘猫送养，希望能有爱猫的人收养它',
+            catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心，',
+            requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，要有爱心，养过猫家里人不讨厌猫，没有猫毛过敏',
+            area:'广东省东莞市',
+            pinglun:23,
+            athor:'我家主子',
+            time:'2019.03.06'
+          },
+          {
+            type:1,
+            img:'../../static/icon/var4.jpg',
+            title:'橘猫送养，希望能有爱猫的人收养它',
+            catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心，喜欢猫，养没有猫毛过敏，要有爱心，',
+            requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏要有爱心，喜家里人不讨厌猫，没有猫毛过敏',
+            area:'广东省东莞市',
+            pinglun:1,
+            athor:'我家主子',
+            time:'2019.03.25'
+          },
+          {
+            type:1,
+            img:'../../static/icon/var4.jpg',
+            title:'橘猫送养，希望能有爱猫的人收养它',
+            catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心，喜欢猫，养没有猫毛过敏，要有爱心，',
+            requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏要有爱心，喜家里人不讨厌猫，没有猫毛过敏',
+            area:'广东省汕头市',
+            pinglun:0,
+            athor:'我家主子',
+            time:'2019.02.22'
+          },
+          {
+            type:1,
+            img:'../../static/icon/var4.jpg',
+            title:'橘猫送养，希望能有爱猫的人收养它',
+            catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心，喜欢猫，养没有猫毛过敏，要有爱心，',
+            requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏要有爱心，喜家里人不讨厌猫，没有猫毛过敏',
+            area:'广东省汕头市',
+            pinglun:7,
+            athor:'我家主子',
+            time:'2019.12.26'
+          },
+          {
+            type:1,
+            img:'../../static/icon/var4.jpg',
+            title:'橘猫送养，希望能有爱猫的人收养它',
+            catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心，喜欢猫，养没有猫毛过敏，要有爱心，',
+            requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏要有爱心，喜家里人不讨厌猫，没有猫毛过敏',
+            area:'广东省汕头市',
+            pinglun:44,
+            athor:'我家主子',
+            time:'2019.03.13'
+          },
+          {
+            type:0,
+            img:'../../static/icon/var4.jpg',
+            title:'橘猫送养，希望能有爱猫的人收养它',
+            catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心过敏，要有爱心，要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏，要有爱心，',
+            requirements:'要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫要有爱心，喜欢猫，讨厌猫，没有猫毛过敏要有爱心，喜欢猫，养过猫家里人不讨厌猫，没有猫毛过敏',
+            area:'北京市',
+            pinglun:758,
+            athor:'我家主子',
+            time:'2013.03.11'
+          },
+          {
+            type:0,
+            img:'../../static/icon/var4.jpg',
+            title:'橘猫送养，希望能有爱猫的人收养它',
+            catdescribe:'是一只非常非常非常可爱的小奶猫要有爱心讨厌猫，没有猫毛过敏，要有爱心，',
+            requirements:'要有爱心，喜欢猫，养过猫家里人不没有猫毛过敏',
+            area:'广东省广州市',
+            pinglun:888,
+            athor:'我家主子',
+            time:'2009.04.26'
+          },
+        ]
+        , adoptListIsNull:false
+      }
     },
-    // 选择地区
-    "area":function(newVal,oldVal){
-      // var area = this.area;
-      // if(newVal != '全部'){
-      //   this.adoptList = this.adoptListAll.filter(function(adopt){
-      //     return  adopt.area == area;
-      //   });
-      // }else{
-      //   this.adoptList = this.adoptListAll;
-      // }
-      // // 
-      // this.adoptList = this.chooseareaFun(this.area,newVal,this.adoptListAll)
-      this.adoptList = this.screenFun('area',newVal,this.adoptList)
-      console.log("长度"+newVal.length);
-      var we = this.$refs.showarea.style.width;
-      console.log("we"+we);
-      // if(newVal.length == 3){
-        var left = newVal.length*16+24;
-        console.log("left"+left);
+    watch: {
+      // 选择类型
+      "choosetype":function(newVal,oldVal){
+        this.adoptList = this.screenFun('choosetype',newVal,this.adoptList)
+      },
+      // 选择排序方式
+      "choosesortway":function(newVal,oldVal){
+        this.adoptList = this.screenFun('choosesortway',newVal,this.adoptList)
+      },
+      // 选择地区
+      "area":function(newVal,oldVal){
+        this.adoptList = this.screenFun('area',newVal,this.adoptList)
+        var left = newVal.length*14+30;
         this.$refs.areadiv.style.paddingLeft = left+'px';
-      // }else if(newVal.length == 2){
+      }
+    },
+    methods: {
+      // 排序方法
+      sortfun(choosesortway,adoptList){
+        if(choosesortway == '最多评论'){
+          adoptList.sort(function(a,b){
+            return b.pinglun - a.pinglun;
+          });
+        }else{
+          adoptList.sort(function(a,b){
+            return b.time.replace('.','') - a.time.replace('.','');
+          });
+        }
+        // return adoptList;
+      },
+      // 类型筛选
+      choosetypeFun(newVal,adoptListAll){
+        var adoptList =[];
+        if(newVal != '全部'){
+          adoptList = adoptListAll.filter(function(adopt){
+            return  newVal!='未被领养'?adopt.type==1:adopt.type==0;
+          });
+        }else{
+          adoptList = adoptListAll;
+        }
+        return adoptList;
+      },
+      // 地区筛选
+      chooseareaFun(area,newVal,adoptListAll){
+        var list = [];
+        if(newVal != '全部'){
+          list = adoptListAll.filter(function(adopt){
+            return  adopt.area == area;
+          });
+        }else{
+          list = adoptListAll;
+        }
+        return list;
+      },
+      // 筛选方法：哪个修改了 就先筛选哪个，排序最后
+      // 参数1：修改的是什么值，
+      // 参数2：修改后的值是什么
+      // 参数3：筛选原对象
+      screenFun(changeParam,newVal,oldlist){
+        var list = [];
+        if(changeParam == 'choosetype'){
+          list = this.choosetypeFun(newVal,this.adoptListAll);//筛选类型
+          list = this.chooseareaFun(this.area,this.area,list);//筛选地区
+          this.sortfun(this.choosesortway,list);//排序
+        }else if(changeParam == 'area'){
+          list = this.chooseareaFun(this.area,newVal,this.adoptListAll);//筛选地区
+          list = this.choosetypeFun(this.choosetype,list);//筛选类型
+          this.sortfun(this.choosesortway,list);//排序
+        }else{
+          list = oldlist;
+          this.sortfun(newVal,list);//排序
+        }
+        if(list.length==0){
+          this.adoptListIsNull = true;
+        }else{
+          this.adoptListIsNull = false;
+        }
+        return list;
+        
+      },
 
-      // }
+
+
+      // 推荐热议tab
+      handleClick(tab, event) {
+        console.log(tab, event);
+      },
+      // searchFun(){
+      //   if(this.searchData != ''){
+      //     console.log("提交的数据是："+this.searchData);
+      //   }else{
+      //     console.log("提交的数据是："+this.hotsearch);
+      //   }
+      // },
+      // 滚动事件
+      scroll(){
+        var des = document.documentElement.scrollTop || document.body.scrollTop;
+        var doc = document.getElementById("right");
+        if(des >= 100){
+          console.log('11')
+          doc.style.position = 'fixed';
+          doc.style.top = '0px';
+        //   // 显示shortcutButton2
+        //   // shortcutButton2.style.display = 'unset';
+
+        }else{
+          console.log('22')
+          doc.style.position = 'absolute';
+          doc.style.top = '0px';
+        //   // 隐藏
+        //   // shortcutButton2.style.display = 'none';
+        }
+      },
+      // 获得地区组件的地区值
+      getArea(data){
+        console.log("子组件传来的"+data);
+        this.area = data;
+        console.log("area"+this.area)
+      }
+      
+  
+    },
+    mounted(){
+      // 滚动事件
+      console.log('addEventListener')
+      window.addEventListener('mousewheel',this.scroll,false);
+      // 列表最新发布排序
+      console.log('排序')
+      this.adoptList = this.adoptListAll;
+      // 时间排序
+      this.adoptList.sort(function(a,b){
+        return b.time.replace('.','') - a.time.replace('.','');
+      });
+    },
+    destroyed () {
+      window.removeEventListener('mousewheel',this.scroll,false);
     }
-  },
-  methods: {
-    // 排序方法
-    sortfun(choosesortway,adoptList){
-      if(choosesortway == '最多评论'){
-        adoptList.sort(function(a,b){
-          return b.pinglun - a.pinglun;
-        });
-      }else{
-        adoptList.sort(function(a,b){
-          return b.time.replace('.','') - a.time.replace('.','');
-        });
-      }
-      // return adoptList;
-    },
-    // 类型筛选
-    choosetypeFun(newVal,adoptListAll){
-      var adoptList =[];
-      if(newVal != '全部'){
-        adoptList = adoptListAll.filter(function(adopt){
-          return  newVal!='未被领养'?adopt.type==1:adopt.type==0;
-        });
-      }else{
-        adoptList = adoptListAll;
-      }
-      return adoptList;
-    },
-    // 地区筛选
-    chooseareaFun(area,newVal,adoptListAll){
-      var list = [];
-      if(newVal != '全部'){
-        list = adoptListAll.filter(function(adopt){
-          return  adopt.area == area;
-        });
-      }else{
-        list = adoptListAll;
-      }
-      return list;
-    },
-    // 筛选方法：哪个修改了 就先筛选哪个，排序最后
-    // 参数1：修改的是什么值，
-    // 参数2：修改后的值是什么
-    // 参数3：筛选原对象
-    screenFun(changeParam,newVal,oldlist){
-      var list = [];
-      if(changeParam == 'choosetype'){
-        list = this.choosetypeFun(newVal,this.adoptListAll);//筛选类型
-        list = this.chooseareaFun(this.area,this.area,list);//筛选地区
-        this.sortfun(this.choosesortway,list);//排序
-      }else if(changeParam == 'area'){
-        list = this.chooseareaFun(this.area,newVal,this.adoptListAll);//筛选地区
-        list = this.choosetypeFun(this.choosetype,list);//筛选类型
-        this.sortfun(this.choosesortway,list);//排序
-      }else{
-        list = oldlist;
-        this.sortfun(newVal,list);//排序
-      }
-      return list;
-    },
-
-
-
-    // 推荐热议tab
-    handleClick(tab, event) {
-      console.log(tab, event);
-    },
-    // searchFun(){
-    //   if(this.searchData != ''){
-    //     console.log("提交的数据是："+this.searchData);
-    //   }else{
-    //     console.log("提交的数据是："+this.hotsearch);
-    //   }
-    // },
-    // 滚动事件
-    scroll(){
-      var des = document.documentElement.scrollTop || document.body.scrollTop;
-      var doc = document.getElementById("right");
-      if(des >= 100){
-        console.log('11')
-        doc.style.position = 'fixed';
-        doc.style.top = '0px';
-      //   // 显示shortcutButton2
-      //   // shortcutButton2.style.display = 'unset';
-
-      }else{
-         console.log('22')
-        doc.style.position = 'absolute';
-        doc.style.top = '0px';
-      //   // 隐藏
-      //   // shortcutButton2.style.display = 'none';
-      }
-    },
-    // 获得地区组件的地区值
-    getArea(data){
-      console.log("子组件传来的"+data);
-      this.area = data;
-      console.log("area"+this.area)
-    }
-    
- 
-  },
-   mounted(){
-    // 滚动事件
-    console.log('addEventListener')
-    window.addEventListener('mousewheel',this.scroll,false);
-    // 列表最新发布排序
-    console.log('排序')
-    this.adoptList = this.adoptListAll;
-    // 时间排序
-    this.adoptList.sort(function(a,b){
-      return b.time.replace('.','') - a.time.replace('.','');
-    });
-  },
-  destroyed () {
-    window.removeEventListener('mousewheel',this.scroll,false);
   }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -376,10 +371,10 @@ export default {
         .showarea{
           position: absolute;
           left:19px;
-          top: 4px;
+          top: 6px;
           color: #f58b54;
           font-weight: bold;
-          font-size: 16px;
+          font-size: 14px;
         }
       }
       .bottomline{
@@ -389,6 +384,19 @@ export default {
         margin-top: 26px;
         margin-bottom: 18px;
       }
+    }
+    .isListNull{
+      text-align: center;
+      color: #666666;
+      font-size: 16px;
+      padding-top: 20px;
+      padding-bottom: 60px;
+    }
+    .tobuttom{
+      margin:20px auto;
+      text-align: center;
+      font-size: 14px;
+      color: #777777;
     }
     .list{
       el-image{
@@ -449,6 +457,12 @@ export default {
             font-size: 14px;
             // line-height: 20px;
             vertical-align: middle;
+          }
+          .el-icon-more{
+            font-size: 16px;
+            color: #aaaaaa;
+            cursor: pointer;
+
           }
         }
         

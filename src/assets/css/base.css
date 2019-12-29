@@ -27,7 +27,22 @@ body{
 .clearfix{
   *zoom:1;/*IE/7/6*/
 }
-
+/* 其他样式 */
+/* 没有更多了 */
+.tobuttom{
+  margin:20px auto;
+  text-align: center;
+  font-size: 14px;
+  color: #777777;
+}
+/* 列表为空 */
+.isListNull{
+  text-align: center;
+  color: #666666;
+  font-size: 16px;
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
 /* element */
 /* banner */
 .el-carousel__item h3 {
@@ -219,4 +234,34 @@ body{
 /* 4adopt寻找铲屎官页面 */
 .adopt .themediv .el-radio-button__inner{
   padding: 18px 4px 20px 18px;
+}
+
+/* 设置页 */
+/* 头像 */
+.left .el-avatar{
+  margin: 0 auto;
+  display: block;
+}
+.left .el-avatar:hover{
+  opacity: 0.6;
+}
+/* .left .el-avatar:hover + .changeImg{
+  display: unset;
+  color: red;
+} */
+/* 导航 */
+.nav .el-menu-item.is-active{
+  /* background-color: #f58b74 */
+  border-left: 2px solid #f58b54;
+}
+.nav .el-menu-item {
+  border-left: 2px solid #ffffff;
+}
+/* 表单 */
+.right .form .el-form-item__label{
+  font-size: 16px;
+  font-weight: bold;
+}
+.form .subForm .el-form-item--mini.el-form-item{
+  display: inline-block;
 }
