@@ -16,7 +16,7 @@
             <el-form-item label="问题：" :label-width="formLabelWidth">
               <el-input v-model="form.name" autocomplete="off"></el-input>
             </el-form-item>
-            <el-form-item label="描述" :label-width="formLabelWidth">
+            <el-form-item label="分类" :label-width="formLabelWidth">
               <el-select v-model="form.region" placeholder="请选择活动区域">
                 <el-option label="区域一" value="shanghai"></el-option>
                 <el-option label="区域二" value="beijing"></el-option>
@@ -124,6 +124,7 @@ export default {
     // 点击分享按钮
     shaleFun(){
       console.log("点击分享按钮");
+      this.$router.push('/article/write')
     },
     // 点击提问按钮
     askFun(){

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index'
 import login from '@/components/login'
+import writeArticle from '@/components/article/writeArticle'
 
 Vue.use(Router)
 
@@ -15,6 +16,10 @@ export default new Router({
     {
       path: '/',
       component: index
+    },
+    {
+      path:'/article/write',
+      component: writeArticle
     }
   ]
 })

@@ -3,7 +3,7 @@
     <div class="nav">
       <div class="w">
         <!-- <img class="logo1" src="../../static/icon/图层4.png" alt=""> -->
-        <img class="logo" src="../../static/icon/铲屎官.png" alt="">
+        <img class="logo" src="../../static/icon/铲屎官.png"  @click="returnMain()"  alt="">
         <div class="nav-list">
           <ul >
             <li><a href="" @click.prevent="navfun(0)" :class="navclass[0]">首页</a></li>
@@ -21,9 +21,9 @@
             <el-divider direction="vertical"></el-divider>
             <span @click="tologin(1)">注册</span>
           </div>
-          <!-- 已登录 -->
+          <!-- 已登录 -->         
           <!-- 消息 -->
-          <div class="mess" :class="{displayNone:!isLogin}" @mouseenter="messCardFunY()" @mouseleave="messCardFunN()"><img src="../../static/icon/消息(1).png" alt="">
+          <div class="mess" @click="tosetPage3" :class="{displayNone:!isLogin}" @mouseenter="messCardFunY()" @mouseleave="messCardFunN()"><img src="../../static/icon/消息(1).png" alt="">
             <div class="prompt" v-if="prompt != 0">
               <p >{{prompt}}</p>
             </div>
@@ -151,6 +151,11 @@ export default {
       this.navclass = ['','','','',''];
       this.middDivName = 'personalHomePage';
       this.$refs.userCard.style.display = 'none';
+    },
+    // 返回首页
+    returnMain(){
+
+      this.$router.push('/');
     },
     // 导航条移动
     navfun(x){

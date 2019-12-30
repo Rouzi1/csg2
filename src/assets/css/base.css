@@ -265,3 +265,49 @@ body{
 .form .subForm .el-form-item--mini.el-form-item{
   display: inline-block;
 }
+
+/* 写文章 */
+/* 封面图上传 */
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 1000px;
+  height: 158px;
+  line-height: 158px;
+  text-align: center;
+}
+.avatar {
+  /* width: 178px;
+  height: 178px; */
+  display: block;
+}
+.coverImg .el-icon-plus:before {
+  content: "点击上传封面图";
+
+  line-height: 158px;
+  font-size: 20px;
+}
+/* 富文本编辑器 */
+.ql-toolbar.ql-snow{
+  border-radius: 4px 4px 0 0;
+}
+.ql-container.ql-snow{
+  border-radius:0 0 4px 4px ;
+}
+.ql-editor{
+  min-height: 300px;
+}
+
+.ariticleType .el-input__inner{
+  border: 1px solid #ccc;
+}

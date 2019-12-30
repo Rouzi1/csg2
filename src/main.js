@@ -14,6 +14,15 @@ import '@/assets/css/element-variables.scss'
 Vue.use(ElementUI);
 // Vue.use(Carousel);
 
+// vue-quill-editor
+// import Vue from 'vue'
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import * as Quill from 'quill'; // 富文本基于quill
+Vue.use(VueQuillEditor)
+
 import VueX from 'vuex'
 Vue.use(VueX)
 var store = new VueX.Store({
