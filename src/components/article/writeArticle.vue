@@ -90,9 +90,11 @@
 
 <script>
 import { container, ImageExtend, QuillWatch } from 'quill-image-extend-module'
-import ImageResize from 'quill-image-resize-module'
-Quill.register('modules/ImageExtend', ImageExtend)
-Quill.register('modules/imageResize', ImageResize)
+// import { quillEditor } from 'vue-quill-editor'
+// import Quill from 'quill' //引入编辑器
+// import imageResize from 'quill-image-resize-module'
+// Quill.register('modules/ImageExtend',ImageExtend)
+// Quill.register('modules/imageResize', imageResize)
 export default {
   data() {
     return {
@@ -104,7 +106,7 @@ export default {
       content: `<p></p><p><br></p><ol></ol>`, // 富文本编辑器默认内容
       editorOption: {
         modules: {
-          imageResize: {},
+          // imageResize: {},
           toolbar: [
             ["bold", "italic", "underline", "strike"], //加粗，斜体，下划线，删除线
             // ['blockquote', 'code-block'],     //引用，代码块
@@ -122,14 +124,14 @@ export default {
             ["image"] //上传图片、上传视频
             // ['image','video']    //上传图片
           ],
-          imageResize: {
-            displayStyles: {
-              backgroundColor: 'black',
-              border: 'none',
-              color: 'white'
-            },
-            modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
-          }
+          // imageResize: {
+          //   displayStyles: {
+          //     backgroundColor: 'black',
+          //     border: 'none',
+          //     color: 'white'
+          //   },
+          //   modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
+          // }
         },
         theme: "snow",
         placeholder: "请输入正文"

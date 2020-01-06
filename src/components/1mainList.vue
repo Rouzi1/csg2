@@ -193,9 +193,9 @@ export default {
           title:'来说说每天早上被猫叫醒是种什么样的体验？',
           content:'不管是不是周时的一个助跑弹跳蹦到我的一个助跑弹跳蹦到我的一个助跑弹跳蹦到我肚子上，疼的我。。。如果不醒来就继续……或者',
           imgs:[
-            '../../static/icon/banner1.jpg',
-            '../../static/icon/banner3.jpg',
-            '../../static/icon/banner2.jpg',
+            require('../../static/icon/banner1.jpg'),
+            require('../../static/icon/banner2.jpg'),
+            require('../../static/icon/banner3.jpg'),
           ],
           zan:111,
           iszan:false,

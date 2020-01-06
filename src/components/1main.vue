@@ -5,7 +5,7 @@
       <div class="banner">
         <el-carousel :interval="2000">
           <el-carousel-item v-for="item in bannerData" :key="item.id">
-            <img :src="'../../static/icon/'+item.img" alt="">
+            <img :src="'../static/icon/'+item.img" alt="">
             <p>{{item.title}}</p>
           </el-carousel-item>
         </el-carousel>
