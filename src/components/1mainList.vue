@@ -211,9 +211,9 @@ export default {
           title:'来2222说说每天早上被猫叫醒是种什么样的体验？',
           content:'不管2222是不是周末，每天早上六点半，我们家猫会准时的一个助跑弹跳蹦到我肚子上，疼的我。。。如果不醒来就继续，我们家猫会准时的一个助跑弹跳蹦到我肚子上，疼的我。。。如果不醒来就继续，我们家猫会准时的一个助跑弹跳蹦到我肚子上，疼的我。。。如果不醒来就继续，我们家猫会准时的一个助跑弹跳蹦到我肚子上，疼的我。。。如果不醒来就继续，我们家猫会准时的一个助跑弹跳蹦到我肚子上，疼的我。。。如果不醒来就继续……或者',
           imgs:[
-            '../../static/icon/banner1.jpg',
-            '../../static/icon/banner3.jpg',
-            '../../static/icon/banner2.jpg',
+            '../static/icon/banner1.jpg',
+            '../static/icon/banner3.jpg',
+            '../static/icon/banner2.jpg',
           ],
           zan:111,
           iszan:false,
